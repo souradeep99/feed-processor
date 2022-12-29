@@ -1,18 +1,20 @@
-package integrators
+package playstore
 
 import (
 	"feed-processor/feedback"
+	"feed-processor/integrators"
 	"feed-processor/repository"
 	"time"
 )
 
+// PlaystoreIntegrator is an implementation of the Integrator interface for Playstore.
 type PlaystoreIntegrator struct {
 	// TODO: Add other fields as needed.
 	AppPackageNames []string
 }
 
-// NewPlaystoreIntegrator returns a new instance of PlaystoreIntegrator.
-func NewPlaystoreIntegrator(appPackageNames []string) Integrator {
+// NewPlaystoreIntegrator returns a new instance of Integrator.
+func NewPlaystoreIntegrator(appPackageNames []string) integrators.Integrator {
 	return &PlaystoreIntegrator{
 		AppPackageNames: appPackageNames,
 	}
@@ -21,7 +23,7 @@ func NewPlaystoreIntegrator(appPackageNames []string) Integrator {
 // FetchData fetches feedback data from the Playstore.
 func (p *PlaystoreIntegrator) FetchData(startTime time.Time, endTime time.Time) (interface{}, error) {
 	// TODO: Implement code to fetch feedback data from the Playstore.
-	// You may want to use the androidpublisher library (https://godoc.org/google.golang.org/api/androidpublisher/v3)
+	// we can use the androidpublisher library (https://godoc.org/google.golang.org/api/androidpublisher/v3)
 	// to make requests to the Playstore API.
 	var fb []*feedback.Feedback
 	for _, _ = range p.AppPackageNames {
@@ -33,7 +35,7 @@ func (p *PlaystoreIntegrator) FetchData(startTime time.Time, endTime time.Time) 
 // ProcessData processes the raw feedback data into a uniform internal structure.
 func (p *PlaystoreIntegrator) ProcessData(rawData interface{}) ([]*feedback.Feedback, error) {
 	// TODO: Implement code to process the raw feedback data into a uniform internal structure.
-	// You may want to enrich the feedback with additional information from external sources,
+	// we can enrich the feedback with additional information from external sources,
 	// classify the feedback, or perform other transformations as needed.
 	return nil, nil
 }

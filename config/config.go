@@ -3,6 +3,10 @@ package config
 import (
 	"errors"
 	"feed-processor/integrators"
+	"feed-processor/integrators/source/discourse"
+	"feed-processor/integrators/source/intercom"
+	"feed-processor/integrators/source/playstore"
+	"feed-processor/integrators/source/twitter"
 	"feed-processor/tenant"
 	"fmt"
 	"gopkg.in/yaml.v2"
@@ -10,6 +14,7 @@ import (
 )
 
 const (
+	// configPath is the path to the YAML config file.
 	configPath = "config.yaml"
 )
 
@@ -19,37 +24,55 @@ type Config struct {
 }
 
 type Tenant struct {
-	TenantID   string    `yaml:"tenant_id"`
-	TenantName string    `yaml:"tenant_name"`
-	Sources    []*Source `yaml:"sources"`
+	// TenantID is the unique identifier for the tenant.
+	TenantID string `yaml:"tenant_id"`
+	// TenantName is the name of the tenant.
+	TenantName string `yaml:"tenant_name"`
+	// Sources is a list of feedback sources for the tenant.
+	Sources []*Source `yaml:"sources"`
 }
 
 type Source struct {
-	Type      string     `yaml:"type"`
+	// Type is the type of feedback source, e.g. "discourse", "twitter", etc.
+	Type string `yaml:"type"`
+	// Discourse is the configuration for the Discourse feedback source.
 	Discourse *Discourse `yaml:"discourse"`
-	Twitter   *Twitter   `yaml:"twitter"`
-	Intercom  *Intercom  `yaml:"intercom"`
+	// Twitter is the configuration for the Twitter feedback source.
+	Twitter *Twitter `yaml:"twitter"`
+	// Intercom is the configuration for the Intercom feedback source.
+	Intercom *Intercom `yaml:"intercom"`
+	// Playstore is the configuration for the Playstore feedback source.
 	Playstore *Playstore `yaml:"playstore"`
 }
 
 type Discourse struct {
+	// BaseURL is the base URL of the Discourse forum.
 	BaseURL string `yaml:"base_url"`
 }
 
 type Twitter struct {
-	ConsumerKey    string `yaml:"consumer_key"`
+	// ConsumerKey is the Twitter API consumer key.
+	ConsumerKey string `yaml:"consumer_key"`
+	// ConsumerSecret is the Twitter API consumer secret.
 	ConsumerSecret string `yaml:"consumer_secret"`
-	AccessToken    string `yaml:"access_token"`
-	AccessSecret   string `yaml:"access_secret"`
+	// AccessToken is the Twitter API access token.
+	AccessToken string `yaml:"access_token"`
+	// AccessSecret is the Twitter API access secret.
+	AccessSecret string `yaml:"access_secret"`
 }
 
 type Intercom struct {
-	AppID   string `yaml:"app_id"`
-	APIKey  string `yaml:"api_key"`
+	// AppID is the Intercom app ID.
+	AppID string `yaml:"app_id"`
+	// APIKey is the Intercom API key.
+	APIKey string `yaml:"api_key"`
+	// BaseURL is the base URL of the Intercom API.
 	BaseURL string `yaml:"base_url"`
 }
 
 type Playstore struct {
+	// AppPackageNames is a list of package names for Playstore
+	// apps that this tenant is interested in receiving feedback.
 	AppPackageNames []string `yaml:"app_package_names"`
 }
 
@@ -69,6 +92,8 @@ func LoadConfig() (*Config, error) {
 	return &config, nil
 }
 
+// GetTenants returns a list of Tenant objects based on
+// the configuration in the YAML config file.
 func GetTenants() ([]*tenant.Tenant, error) {
 	var tenants []*tenant.Tenant
 	config, err := LoadConfig()
@@ -84,6 +109,8 @@ func GetTenants() ([]*tenant.Tenant, error) {
 			Name:        t.TenantName,
 			Integrators: []integrators.Integrator{},
 		}
+		// Iterate over the sources for this tenant and
+		// create the corresponding Integrator objects.
 		for _, source := range t.Sources {
 			if source == nil {
 				return nil, errors.New("empty source")
@@ -99,19 +126,32 @@ func GetTenants() ([]*tenant.Tenant, error) {
 	return tenants, nil
 }
 
+// getSource creates an Integrator instance based on the given Source.
 func getSource(source Source) (integrators.Integrator, error) {
 	switch source.Type {
 	case "discourse":
-		return integrators.NewDiscourseIntegrator(source.Discourse.BaseURL), nil
+		if source.Discourse == nil {
+			return nil, errors.New("empty discourse source")
+		}
+		return discourse.NewDiscourseIntegrator(source.Discourse.BaseURL), nil
 	case "twitter":
-		return integrators.NewTwitterIntegrator(source.Twitter.ConsumerKey,
+		if source.Twitter == nil {
+			return nil, errors.New("empty twitter source")
+		}
+		return twitter.NewTwitterIntegrator(source.Twitter.ConsumerKey,
 			source.Twitter.ConsumerSecret, source.Twitter.AccessToken,
 			source.Twitter.AccessSecret), nil
 	case "intercom":
-		return integrators.NewIntercomIntegrator(source.Intercom.AppID,
+		if source.Intercom == nil {
+			return nil, errors.New("empty intercom source")
+		}
+		return intercom.NewIntercomIntegrator(source.Intercom.AppID,
 			source.Intercom.APIKey, source.Intercom.BaseURL), nil
 	case "playstore":
-		return integrators.NewPlaystoreIntegrator(source.Playstore.AppPackageNames), nil
+		if source.Playstore == nil {
+			return nil, errors.New("empty playstore source")
+		}
+		return playstore.NewPlaystoreIntegrator(source.Playstore.AppPackageNames), nil
 	default:
 		return nil, errors.New(fmt.Sprintf("not valid source type: %s", source.Type))
 	}

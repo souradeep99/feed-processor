@@ -1,7 +1,8 @@
-package integrators
+package twitter
 
 import (
 	"feed-processor/feedback"
+	"feed-processor/integrators"
 	"feed-processor/repository"
 	"time"
 )
@@ -14,12 +15,13 @@ type TwitterIntegrator struct {
 	AccessSecret   string
 }
 
+// NewTwitterIntegrator returns a new instance of Integrator.
 func NewTwitterIntegrator(
 	consumerKey string,
 	consumerSecret string,
 	accessToken string,
 	accessSecret string,
-) Integrator {
+) integrators.Integrator {
 	return &TwitterIntegrator{
 		ConsumerKey:    consumerKey,
 		ConsumerSecret: consumerSecret,
@@ -31,7 +33,7 @@ func NewTwitterIntegrator(
 // FetchData fetches feedback records from the Twitter source.
 func (t *TwitterIntegrator) FetchData(startTime time.Time, endTime time.Time) (interface{}, error) {
 	// TODO: Implement code to fetch feedback data from Twitter.
-	// You may want to use the go-twitter library (https://github.com/dghubble/go-twitter)
+	// we can use the go-twitter library (https://github.com/dghubble/go-twitter)
 	// to make requests to the Twitter API.
 	return nil, nil
 }
@@ -39,7 +41,7 @@ func (t *TwitterIntegrator) FetchData(startTime time.Time, endTime time.Time) (i
 // ProcessData processes the raw data from the FetchData method and transforms it into a uniform internal structure
 func (t *TwitterIntegrator) ProcessData(rawData interface{}) ([]*feedback.Feedback, error) {
 	// TODO: Implement code to process the raw feedback data into a uniform internal structure.
-	// You may want to enrich the feedback with additional information from external sources,
+	// we can enrich the feedback with additional information from external sources,
 	// classify the feedback, or perform other transformations as needed.
 	return nil, nil
 }

@@ -1,8 +1,9 @@
-package integrators
+package discourse
 
 import (
 	"encoding/json"
 	"feed-processor/feedback"
+	"feed-processor/integrators"
 	"feed-processor/integrators/models"
 	classification "feed-processor/ml-classification"
 	"feed-processor/repository"
@@ -29,7 +30,8 @@ type DiscourseIntegrator struct {
 	BaseURL string
 }
 
-func NewDiscourseIntegrator(baseURL string) Integrator {
+// NewDiscourseIntegrator returns a new instance of Integrator.
+func NewDiscourseIntegrator(baseURL string) integrators.Integrator {
 	return &DiscourseIntegrator{
 		BaseURL: baseURL,
 	}
@@ -160,8 +162,8 @@ func (d *DiscourseIntegrator) StoreData(records []*feedback.Feedback, db reposit
 
 func (d *DiscourseIntegrator) getSource() *feedback.Source {
 	return &feedback.Source{
-		ID:   int64(Discourse),
-		Name: Discourse.String(),
+		ID:   int64(integrators.Discourse),
+		Name: integrators.Discourse.String(),
 	}
 }
 

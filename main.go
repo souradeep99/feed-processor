@@ -19,7 +19,7 @@ func main() {
 	}
 	store.SaveTenant(tenants)
 
-	// create orchestrator and pass in the integrators
+	// create orchestrator and use in the integrators
 	orch := orchestrator.New(db, store)
 
 	for _, t := range tenants {
