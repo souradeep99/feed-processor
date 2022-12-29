@@ -1,0 +1,46 @@
+tenants:
+  - tenant_id: "tenant0"
+    tenant_name: "tenant0"
+    sources:
+      - type: "discourse"
+        discourse:
+          base_url: "meta.discourse.org"
+      - type: "twitter"
+        twitter:
+          consumer_key: "12345678"
+          consumer_secret: "123456780"
+          access_token: "12345678"
+          access_secret: "12345678"
+      - type: "intercom"
+        intercom:
+          app_id: "12345678"
+          api_key: "12345678"
+          base_url: "intercom.com"
+      - type: "playstore"
+        playstore:
+          app_package_names:
+            - "com.example.app0"
+            - "com.example.app1"
+
+  - tenant_id: "tenant1"
+    tenant_name: "tenant1"
+    sources:
+      - type: "discourse"
+        discourse:
+          base_url: "meta.discourse.org"
+      - type: "twitter"
+        twitter:
+          consumer_key: "12345678"
+          consumer_secret: "123456780"
+          access_token: "12345678"
+          access_secret: "12345678"
+      - type: "intercom"
+        intercom:
+          app_id: "12345678"
+          api_key: "12345678"
+          base_url: "intercom.com"
+      - type: "playstore"
+        playstore:
+          app_package_names:
+            - "com.example.app0"
+            - "com.example.app1"

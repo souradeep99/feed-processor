@@ -20,7 +20,7 @@ type Feedback struct {
 
 // Tenant represents a tenant.
 type Tenant struct {
-	ID   int64
+	ID   string
 	Name string
 	// other fields for storing tenant-specific data and metadata
 }

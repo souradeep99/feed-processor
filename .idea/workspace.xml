@@ -4,7 +4,15 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="06821fe8-fb21-4513-be11-8017695ae242" name="Changes" comment="" />
+    <list default="true" id="06821fe8-fb21-4513-be11-8017695ae242" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/feedback/feedback.go" beforeDir="false" afterPath="$PROJECT_DIR$/feedback/feedback.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integrators/discourse.go" beforeDir="false" afterPath="$PROJECT_DIR$/integrators/discourse.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integrators/integrators.go" beforeDir="false" afterPath="$PROJECT_DIR$/integrators/integrators.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/orchestrator/orchestrator.go" beforeDir="false" afterPath="$PROJECT_DIR$/orchestrator/orchestrator.go" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -25,19 +33,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.go.formatter.settings.were.checked": "true",
-    "RunOnceActivity.go.migrated.go.modules.settings": "true",
-    "RunOnceActivity.go.modules.go.list.on.any.changes.was.set": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "go.import.settings.migrated": "true",
-    "go.sdk.automatically.set": "true",
-    "last_opened_file_path": "/home/souradeep1999/go/src/feed-processor"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.formatter.settings.were.checked&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.migrated.go.modules.settings&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.modules.go.list.on.any.changes.was.set&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
+    &quot;go.sdk.automatically.set&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/souradeep1999/go/src/feed-processor&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />

@@ -2,6 +2,7 @@ package integrators
 
 import (
 	"feed-processor/feedback"
+	"feed-processor/repository"
 	"time"
 )
 
@@ -9,5 +10,5 @@ import (
 type Integrator interface {
 	FetchData(startTime time.Time, endTime time.Time) (interface{}, error)
 	ProcessData(interface{}) ([]*feedback.Feedback, error)
-	StoreData([]*feedback.Feedback, *database.DB) error
+	StoreData([]*feedback.Feedback, repository.RepositoryStore) error
 }

@@ -5,6 +5,7 @@ import (
 	"feed-processor/feedback"
 	"feed-processor/integrators/models"
 	classification "feed-processor/ml-classification"
+	"feed-processor/repository"
 	"fmt"
 	"io/ioutil"
 	"net/http"
@@ -25,9 +26,13 @@ var (
 
 // DiscourseIntegrator represents an integrator for the Discourse feedback source.
 type DiscourseIntegrator struct {
-	BaseURL    string
-	TenantID   int64
-	TenantName string
+	BaseURL string
+}
+
+func NewDiscourseIntegrator(baseURL string) Integrator {
+	return &DiscourseIntegrator{
+		BaseURL: baseURL,
+	}
 }
 
 // FetchData fetches feedback records from the Discourse source.
@@ -96,7 +101,6 @@ func (d *DiscourseIntegrator) ProcessData(rawData interface{}) ([]*feedback.Feed
 			Username:    data.Username,
 			Description: data.Description,
 			Source:      d.getSource(),
-			Tenant:      d.getTenant(),
 			CreatedAt:   data.CreatedAt,
 			UpdatedAt:   data.UpdatedAt,
 		}
@@ -147,24 +151,17 @@ func (d *DiscourseIntegrator) ProcessData(rawData interface{}) ([]*feedback.Feed
 }
 
 // StoreData stores the processed feedback records in the database.
-func (d *DiscourseIntegrator) StoreData(records []*feedback.Feedback, db *database.DB) error {
+func (d *DiscourseIntegrator) StoreData(records []*feedback.Feedback, db repository.RepositoryStore) error {
 	// TODO: implement this method
 	// insert the processed feedback records into the database
-	// return any error
-	return nil
+	err := db.StoreData(records)
+	return err
 }
 
 func (d *DiscourseIntegrator) getSource() *feedback.Source {
 	return &feedback.Source{
 		ID:   int64(Discourse),
 		Name: Discourse.String(),
-	}
-}
-
-func (d *DiscourseIntegrator) getTenant() *feedback.Tenant {
-	return &feedback.Tenant{
-		ID:   d.TenantID,
-		Name: d.TenantName,
 	}
 }
 
