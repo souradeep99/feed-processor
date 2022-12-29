@@ -17,3 +17,11 @@ This project is designed to ingest feedback records from various sources and sto
 - Dependencies (specified in [go.mod](go.mod))
 
 
+## Sources
+
+The following sources are currently supported:
+
+- Intercom
+- Playstore
+- Twitter
+- Discourse Posts
